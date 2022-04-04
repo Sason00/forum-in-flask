@@ -430,4 +430,4 @@ def search(wts=""):
 
 
 
-app.run(host="192.168.1.7", port=8080, debug=True) # #  https:, ssl_context='adhoc') #  192.168.1.7
+app.run(host="localhost", port=8080, debug=True) # #  https:, ssl_context='adhoc')
