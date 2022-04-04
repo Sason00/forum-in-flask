@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}create new user{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="text">User Name:</label>
+            <input type="text" class="form-control" id="text" placeholder="Enter username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+        </div>
+        <input type="checkbox" id="cb" onclick="showHidePassword()"><label for="cb" id="sh">Show Password</label><br>
+        <input type="submit" value="create user" class="btn btn-success" onclick="createUser()">
+    </div>
+    <script>
+        function showHidePassword() {
+            var pwd = document.getElementById("pwd");
+            var sh = document.getElementById("sh");
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                sh.innerText = "Hide Password"
+            } else {
+                pwd.type = "password";
+                sh.innerText = "Show Password"
+            }
+        }
+
+
+        function createUser(){
+            var email = document.getElementById("email");
+            var username = document.getElementById("text");
+            var password = document.getElementById("pwd");
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/createUser/" + email.value + "/" + username.value + "/" + password.value, true);
+            xhttp.send();
+            xhttp.onreadystatechange = ()=>{
+                window.location.href = xhttp.responseText;
+            };
+        }
+    </script>  
+{% endblock %}

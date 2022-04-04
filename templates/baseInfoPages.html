@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block body %}
+    <div class="{% block class %}{% endblock %}">
+        <strong>{%block type%}{%endblock%}</strong> {% block message %}{% endblock %}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <a><button class="btn" onclick="history.back()">return to the last page</button></a>
+    <a href="/"><button class="btn">return to home page</button></a>
+{% endblock %}

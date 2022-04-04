@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block body %}
+    <div class="container">              
+        <label class="form-label" for="form3Example4">Username</label>
+        <input type="text" id="username" class="form-control form-control-lg" placeholder="Username"> 
+
+        <label class="form-label" for="form3Example4">Password</label>
+        <input type="password" id="pwd" class="form-control form-control-lg" placeholder="Password"> 
+
+        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" onclick="showHidePassword()">
+        <label class="form-check-label" for="form2Example3" id="sh">Show Password</label>
+
+        <button type="button" class="btn btn-success" onclick="logIn()">sign in</button>
+    </div>
+    <script>
+        function showHidePassword() {
+            var pwd = document.getElementById("pwd");
+            var sh = document.getElementById("sh");
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                sh.innerText = "Hide Password"
+            } else {
+                pwd.type = "password";
+                sh.innerText = "Show Password"
+            }
+        }
+
+        function logIn(){
+            var username = document.getElementById("username");
+            var password = document.getElementById("pwd");
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/logIn/" + username.value + "/" + password.value, true);
+            xhttp.send();
+            xhttp.onreadystatechange = ()=>{
+                if(xhttp.responseText == "you logged in"){
+                    window.location.href = "/";
+                }else{
+                    window.location.href = "/errorPage";
+                }
+            };
+        }
+    </script>
+{% endblock %}

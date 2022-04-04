@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}create new sub{% endblock %}
+{% block body %}
+    <div class="container">
+        <label for="subName">sub name</label><input type="text" name="subName" id="subNameEntry" class="form-control" placeholder="name"><br>
+        <label for="subType">sub type</label><input type="text" name="subType" id="subTypeEntry" class="form-control" placeholder="type (optinal)"><br>
+        <input type="submit" value="create" onclick="createSub()" class="btn btn-success">
+    </div>
+    <script>
+        var subNameValue = document.getElementById("subNameEntry");
+        var subTypeValue = document.getElementById("subTypeEntry");
+        function createSub(){
+            var xhttp = new XMLHttpRequest();
+            if(subTypeValue.value == ""){
+                xhttp.open("POST", "/createSub/" + subNameValue.value + "/{{ session['username'] }}", true);
+                xhttp.send();
+                xhttp.onreadystatechange = ()=>{
+                    if(this.status == 200){
+                        window.location.href = xhttp.responseText;
+                    }else{
+                        window.location.href = xhttp.responseText;
+                    }
+                };
+            }else{
+                xhttp.open("POST", "/createSub/" + subNameValue.value + "/{{ session['username'] }}/" + subTypeValue.value, true);
+                xhttp.send();
+                xhttp.onreadystatechange = ()=>{
+                    if(this.status == 200){
+                        window.location.href = xhttp.responseText;
+                    }else{
+                        window.location.href = xhttp.responseText;
+                    }
+                };                
+            }
+        };
+    </script>
+{% endblock %}
